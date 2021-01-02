@@ -1,5 +1,5 @@
 //game-lib-2.js
-//setage
+
 function setAge(index){
     var my_age =-1;
     if(SELF_ID==index && initialization_stage ==true){
