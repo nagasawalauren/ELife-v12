@@ -1,0 +1,124 @@
+//about elife 
+//version 3
+//BitLife without the annoying ads.
+//suburban dynasty simulator.
+
+//12/17/2020
+
+- create a function to calculate percentages in random events and pop up a job.
+
+//12/22/2020
+
+- the character array shouldn't get too big...kill some people every now and again.
+
+- introduce traits similar to Crusader kings.
+- make career a trait of jobs rather than vice versa.
+- relationships, relationships. make this self-centric: only make relationship values for people the character knows. ie their index should be in the character object.
+
+- events. again, events are similar to ck2
+
+
+- algorithm.
+-turns are 1/4th of the year
+
+-set event triggers.
+
+-once the event triggers, get the object with all the event flavor text in it.
+
+- pseudocode
+
+constantly run assessment. 
+
+EVENT TRIGGERS 
+
+- countdown timers: some triggers may be on a timer. for example, a "found out about my affair! timer" or "my crimes caught up to me!" timer
+- trait effect: some may be a side effect of traits: a "genius" character gets offered a scholarship, for example.
+- age: some events are triggered by a certain age, like the school prom.
+- random accident/opportunity: sometimes people die randomly or something weird happens.
+- random flavor : sometimes we get an opportunity to add some flavor to our memories.
+
+1) event is called. 
+2) (pass in event title or "random" to trigger a random event), if someone is involved pass in the character index
+3) var options_arr = create an array of all potential options. replace text variables if needed.
+4) recieve option input from user
+5) now that option is chosen, assess what you need. the character, the asker, etc. return as a value.
+6) change values based on the result. if it was a negative result, penalize the player, etc.
+7) return result text.
+
+ASSIGNING TRAITS
+
+use a for loop.
+
+put a function in the js object like assign and call
+
+if(traits_arr[x].can_Assign(index));
+
+making object methods:
+https://www.w3schools.com/js/js_object_methods.asp
+
+
+which will check if the trait can be assigned to the character.
+
+if it returns TRUE, push the trait index to the characters trait array.
+
+TRAIT EFFECTS
+
+- buffing/debuffing: Traits can buff character stats of health, happiness, attractiveness, intelligence. 
+
+- limit or opening play options: Traits can also add or limit options: demisexual trait will not give the option to have sex if the relationship is too low. 
+
+- relationship perks: if two characters have the same relation
+
+//12/23/2020
+
+MEMORY "TRAITS"
+
+memory traits are "personalized" objects similar to traits in that they can influence events. 
+
+they are personalized with the character's individual information and can be checked when events are called.
+
+memories do not have effects like traits do.
+
+PASSAGE OF TIME
+
+Instead of by year as in bitlife, we will go with seasons. that way we can have some seasonal events.
+
+ALLOCATED CHARACTER ARRAY
+createFamilies starts by deallocating character_arr and initializing it, so memory isn't an issue.
+
+//TO DO 12.23.2020
+
+add TRAITS, then add RELATIONSHIPS.
+add JOBS and ORGANIZATIONS.
+
+SOURCING TRAITS:
+
+the characterTrait object has a source attribute. if we are generating characters at the beginning, randomize trait sources.
+
+removing perks? need to have perks in order to remove them.
+
+skill levels. I'm not doing skills except as traits. so events will test if a trait (skill) is there (true/false).
+
+SOCIALIZING
+
+function to set initial relationship level by comparing traits, then having "dating" questions where the right answer aligns with the other person's trait.
+
+this can probably be re run because people's traits keep changing.
+
+ACTIVITIES
+
+these should be linked to a preferences database...
+
+COMPLIMENTS/CONVERSATIONS/INSULTS
+
+these should be determined as positive or negative depending on traits.
+
+character traits have an associated activity that triggers the trait. if that activity is negative effect, the trait is "negative memory", and positive if it is a "positive memory".
+
+memory triggers.
+
+if the characters undergo a activity associated with a subject, it will trigger a memory. the memory will be positive or negative depending on the trait.
+
+activity algorithm
+
+character does activity with other characters. 

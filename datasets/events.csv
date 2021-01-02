@@ -1,0 +1,2 @@
+﻿id,title,description_template,qualifiers,subject_ids,can_trigger,options
+1,Getting A Dog,"After $event_trigger, you're beginning to wonder if you shouldn't get a dog. You decide to beg your parents for a dog. They say they'll only get one if you take sole responsibility for taking care of it.",character must be a child;,"[""dog""]",,"[0,1]"

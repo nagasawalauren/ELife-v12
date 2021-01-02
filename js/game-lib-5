@@ -1,0 +1,7 @@
+//game-lib-5.js
+
+
+displayCurrentJobs(index){
+//get array of jobs the character has and return text in the format "[job] at [org], " etc.
+
+};

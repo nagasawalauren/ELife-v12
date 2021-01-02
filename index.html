@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+    <title id="title"> ELIFE - V.11 </title>
+<link rel="shortcut icon" style="width:4% height:auto" type="image/jpg" href="img/world.png"/>
+    <link rel="stylesheet" href="elife.css">   
+    <!-- data -->
+    <script src= "datasets/last-names.js"></script>
+    <script src= "datasets/first-names.js"></script>
+    <script src= "datasets/data_arrays.js"></script>
+    <!-- scripts -->
+    <script src= "js/game-lib.js"></script>
+    <script src= "js/game-lib-2.js"></script>
+    
+    <script src= "js/game-lib-3.js"></script>
+        <script src= "js/game-lib-4.js"></script>
+    
+        <script src= "js/game-lib-5.js"></script>
+</head>
+<body onload="initialize()">
+    <div id="outercontainer">
+    <div id="header">
+        <div id="title">
+    <h1 id="h1">ELIFE: A DYNASTY SIMULATOR  </h1>
+           
+        </div>
+        <div id="content">
+            <div id="displayheader-wrapper" class="ui-element">
+                <div id="left-display-header" class="ui-element">
+                <p id="displaylogheader"></p>
+                <p id="time_counter"></p>
+                </div>
+                <div id="rightmsgbox"></div>
+            </div>
+            <br>
+         <div id="buttoncontainer" class="ui-element">
+             
+             <img src="img/add_button.png" class="buttoncontainericon" id="addTimeButton" onclick="addTime(1)">
+            <img class="buttoncontainericon" src="img/career.png" id="OccupationButton">
+            <img class="buttoncontainericon" id="PhonebookButton" onclick="displayAllCharacters()" src ="img/phone-book.png" alt="Click this button to see all characters in the game.">
+            <img class="buttoncontainericon" id="MoneyButton" src="img/money.png" alt="Click this button to see all your character's assets.">
+             <img class="buttoncontainericon" id="ActionButton" src="img/world.png" alt="Click this button to do something in the world.">
+         <img src="img/reload.png" class="buttoncontainericon" id="clearButton" onclick="clear_rightinfobox()">
+        </div>
+     
+        <br>
+
+      <!--  <div id="optionscontainer">
+            
+            
+            <button id="loadButton">LOAD</button>
+            <button id="saveButton">SAVE</button>
+            <button id="optionsButton">OPTIONS</button>
+            <button id="donateButton">DONATE TO GAME</button>
+            
+        </div> -->
+<div id="gameplaywrapper">
+     <!--   <div id="storybox" class="ui-element">
+           
+        </div>-->
+    
+    <div id="rightinfobox" class="ui-element">
+    </div>
+    <div id="footer">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>  
+        </div>
+        
+    </div>
+           
+    </div>
+    </div>
+</body>

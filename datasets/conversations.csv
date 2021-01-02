@@ -1,0 +1,10 @@
+﻿id,about,type,subjects,age_group_restriction,nsfw
+1,moron,insult,"[""moron""]",none,FALSE
+2,whether Santa Claus is real,conversation,"[""Santa Claus""]",child,FALSE
+3,whether a De Jure right to a territory justifies a fabricated Casus Belli to attack allies,conversation,"[""Crusader Kings 2""]",adult,FALSE
+4,whether Cristiano Ronaldo is the GOAT,conversation,"[""Cristiano Ronaldo"", ""European football"", ""sports"", ""Portugal""]",adult,FALSE
+5,who would win in a fight between Po from Kung Fu Panda and Darth Vader,conversation,"[""Kung Fu Panda"", ""panda bear"", ""animated movies"", ""Darth Vader"", ""Star Wars""]",none,FALSE
+6,if Cheddar is a good name for a dog,conversation,"[""Brooklyn 99"", ""dog""]",none,FALSE
+7,how can there be a Guinness Book of World Records every year? Like how come enough world records are broken every year that they make a book about it?,conversation,"[""Guinness World Records""]",none,FALSE
+8,how many roads must a man walk down,conversation,"[""Bob Dylan"",""roads"",""walking""]",none,FALSE
+9,,,,,

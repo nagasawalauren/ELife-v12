@@ -1,0 +1,37 @@
+/*images from freepik*/       
+
+body{background-color: paleturquoise;font:16px/26px Arial, sans-serif;}
+
+
+        #footer{margin:0 auto;background-color: white;border-color: white;border-width:3px; font:10px/26px Arial, sans-serif;}
+
+        div{margin:0 auto; background-color: white; border-width:3px; padding-left:20px; padding-right:20px; padding-bottom:5px;padding-top: 5px; max-width:1200px; border-color: darkturquoise;}
+#gameplaywrapper{height:auto;}
+
+        .ui-element{ height:400px;width:400px;border:1px solid #ccc;overflow: auto; background-color: paleturquoise;padding-right: 5px;border-color: darkcyan;border-width: 1px;}
+.characterlink{
+    color:blue;  text-decoration: underline;
+}
+
+#displaychardatalistitem:hover{background-color:aliceblue;}
+
+.phonebook-container{background-color: white;}
+.progressbar{font-family: monospace; float: right;}
+#rightinfobox{ width:1000px; height:350px;border-width: 15px;border-color: darkcyan;border-width: 1px;}
+
+#buttoncontainer{width:1000px;height:70px;padding-top: 15px;border-width: 15px;border-color: darkcyan;border-width: 1px;}
+
+#storybox{float:left;width:450px;}
+#characterinfobox{background-color: paleturquoise;width:700px;}
+#optionscontainer{height: 50px;}
+#displaychardataheader{font-weight: bold;  text-transform: uppercase;}
+
+.buttoncontainericon{width:4%; height:auto;}
+#content{height:auto;}
+
+#displayheader-wrapper{width:1000px;height:100px;}
+#left-display-header{float:left;height:85px;width:500px;}
+#rightmsgbox {float:right;overflow: hidden;background-color:paleturquoise;text-align:right;border-color: darkcyan;width:300px;border-color: darkcyan;}
+#displaylogheader{margin: 0 auto; width:auto;background-color: paleturquoise;border-color: darkcyan;}
+#time_counter{margin: 0 auto; width:auto; background-color: paleturquoise;border-color: darkcyan;}
+

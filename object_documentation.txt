@@ -1,0 +1,229 @@
+//object documentation.txt
+//12/23/2020
+
+ARRAY DOCUMENTATION
+////////////////////////////////
+
+ARRAY NAME: activity_arr
+TYPE: static js object array (Activity)
+DESCRIPTION: array of all activities a character can do.
+
+ARRAY NAME: character_arr
+TYPE: dynamic js object array (Character)
+DESCRIPTION: array of all Character objects
+
+ARRAY NAME: character_jobs_array
+TYPE: dynamic js object array (CharacterJobs)
+DESCRIPTION: generated array which tracks characters job information.
+
+ARRAY NAME: couples_array
+TYPE: dynamic integer array
+DESCRIPTION: empty on initialization, but generates a array of all the UNIQUE married couple pairs as two integer arrays.
+
+ARRAY NAME: event_array 
+TYPE: static array of js objects (Event)
+DESCRIPTION: static array of events which pop up during gameplay.
+
+ARRAY NAME: event_options_array 
+TYPE: static js object array (EventOptions)
+DESCRIPTION: array of options and result.
+
+ARRAY NAME: firstnames_array
+TYPE: static js object array (FirstName)
+DESCRIPTION: array of first names and assigned genders.
+
+ARRAY NAME: income_level_arr
+TYPE: static int 
+DESCRIPTION: a list of 5 income levels. each value in the level is the min value required to enter the level.
+
+ARRAY NAME: jobs_array
+TYPE: static js object array (Jobs)
+DESCRIPTION: array of all Job objects.
+
+ARRAY NAME: locations_array
+TYPE: static js object array (Location)
+DESCRIPTION: array of all Location objects.
+
+ARRAY NAME: organization_array
+TYPE: static string array
+DESCRIPTION: array of strings for organization name.
+
+ARRAY NAME: relationship_array
+TYPE: dynamic js object array (Relationship)
+DESCRIPTION: dynamic array of relationships generated at startup. needs to be calculated after traits are given.
+
+ARRAY: conversation_array
+TYPE: static js object array (Conversation)
+DESCRIPTION: static array of topics.
+
+ARRAY: subject_array
+TYPE: static js object array
+DESCRIPTION: array of subjects 
+
+ARRAY: surnames_array
+TYPE: static string array
+DESCRIPTION: list of surnames
+
+ARRAY: traits_arr
+TYPE: static js object array (Trait)
+DESCRIPTION: list of traits.
+
+JS OBJECT DOCUMENTATION
+////////////////////////////////
+
+OBJECT NAME: Activity
+DESCRIPTION: array of every activity, conversation, etc that a character can do.
+ATTRIBUTES:
+- name: (string) name of activity.
+- type: (string) conversation, insult, etc.
+- subjects: (string array) array of phrases that can be used to trigger a memory.
+
+OBJECT NAME: Character
+DESCRIPTION: constructor takes first name and last name from random array, and the gender is assigned from the random firstname gender linked in the firstname array.
+ATTRIBUTES: 
+- first_name: (string) character's first name as parameter
+- last_name: (string) character's last name as parameter
+- age: (integer) character's age. character_arr[0] is always 0.
+- health: (integer) starts as 100. character's health. if it gets too low the character is at risk of dying.
+- parents: (integer Array) Character's birth parent indexes. array can be empty at initialization.
+- siblings: (integer Array) Character's sibling indexes is between 0 and 3.
+- friends: (integer Array) character's current friends indexes. at initialization generates between 0 and 7 friends. at initialization has 10% chance of having no friends.
+- children: (integer Array) array of children indexes. 
+- partners: (integer Array) all people indexes the character is MARRIED to-if the partner is not adult, it is a committed boyfriend/girlfriend relationship. If the partner is married already, this can become a polyamorous relationship through an event and all partners get the trait polyamorous.
+- lovers: (integer Array) all the indexes of people the character is with romantically/sexually IN ADDITION TO a committed relationship, but not approved by partner.
+- expartners: (integer Array). all the former exwives and husbands, ex boyfriends and girlfriends.
+- fertility: (integer) between 0 and 100. determines how often a character has kids during gameplay.
+- income_level: (integer) income level is an integer from 0-4 (see income_level array)
+- sexuality: (string) generated after partners are generated. only initialized at adulthood.
+- gender: (string) gender is assigned at birth like in real life- can change to nonbinary - or transgender, in which case there will be a trait for it.
+- attractiveness_rating: (integer) max is 100 (though potentially, this can be higher than 100 with enough perks...). high rated characters are "beautiful", low rated characters are "ugly" and these are assigned traits.
+- intelligence_rating: (integer) high rated characters are intelligent, low rated characters are stupid.
+- net_worth: (integer) the character's personal wealth. calculated from income level, but varies according to expenses and salary.
+- alive: (boolean) if the character is dead, might become a ghost.
+- traits: (js object Array (CharacterTrait)) dynamic array of CharacterTrait objects
+- memories: (Array of arrays) dynamic array of arrays in the format ["topic", "trait_id"]. when a CharacterTrait is added, it adds some subject triggers. an activity may activate one of the triggers and characters will recall a memory, which will have a potentially positive or negative effect on the activity for them. if the topic is a number and not a string, it is a character index and the character is the trigger.
+- in_scope: (integer) 0, 1, 2, 3. if inscope is > 0 for this character, the self character will be given updates on them. 1 is inner circle (includes memories), 2 is a weaker version (only deaths, marriages, childbirth.) 3 is an even weaker version for an acquaintance (only death alerts.)
+- jobs_array: (int Array) full of indexes that point to character_jobs_array, which list all the character's jobs.
+
+OBJECT NAME: CharacterJob
+DESCRIPTION: part of character_job_array. uses character indexes to track jobs for every character. needs to generate at the start of program.
+ATTRIBUTES: 
+- character_id: (int) index of character who holds this position.
+- job_id: (int) index of position data in job_array.
+- organization_id: (int) index pointing to organization_array.
+- performance: (int) measures job performance with limit of 100.
+- stress_level: (int) measures level of stress. limit of 100.
+- approval: (int) measures how much coworkers like you.
+- salary: (int) annual salary calculated by jobs array
+- supervisor: (int) index of character who is the supervisor. if there is not a character who can be the supervisor, the character is created.
+- coworkers: (int array) array of character indexes. there must be TEN coworkers. if there are none available, generate more characters.
+
+OBJECT NAME: CharacterTrait
+DESCRIPTION: an object that takes a trait and a character index and pushes it to a custom character. the constructor will take the character index, trait index and source string.
+ATTRIBUTES:
+- character_id: (int) index of character. 
+- trait_id: (int) index of trait in trait_array.
+- character_age: (int) the age the character was then they got the trait.
+- recieved_from: (int) default -1. if a character was responsible for triggering the action, their index would be here.
+- reaction: (int) characters feelings about getting trait. inherited from Trait, but overridden depending on if getting the trait was a positive experience or not.
+- heredity: (int) if gotten through birth, friends, etc. index of the character they got it from. if no character, default is -1
+- duration: (int) number of turns the character has had the trait. if Trait.duration/CHaracter_Trait.duration is between 0 and 1, it triggers an event.
+- activity: (string) activity that caused the character to get the trait.
+- modified_trait: (string) take a trait and modify if neccessary.
+- place: (string) if applicable the place where the trait was triggered.
+- subject: (string array) if applicable, the topics which concerns the trait (potential triggers)
+- text: (string) template. this comes from an event option result (EventOption.generate_result) method. format "at [age] x years ago, [character] gained [modified trait] (with [subject]) from [activity] (with [subject]) at [place]"
+
+OBJECT NAME: Conversation
+DESCRIPTION: part of conversation_array
+ATTRIBUTES:
+- id: (int)
+- about: (string) the text the conversation is about that the player sees.
+- type: (string) compliment, insult, conversation, flirt
+- subjects: (string array) the subjects that could be used as a trigger.
+- age_group_restriction: (string) baby, adult, child, etc. if none, there is no age group restriction restricts conversation topics to certain age groups, though genius kids can talk about anything, and interests might change restrictions. childish adults can also access childish conversation topics, though the person they are talking to might not enjoy it.
+- nsfw: (boolean) returns true if the subject matter is inappropriate for children.
+
+
+OBJECT NAME: Event
+DESCRIPTION: part of event_array
+ATTRIBUTES: 
+- event_id: (int) id number
+- title: (string) title of event.
+- description_template: (string) description of event. needs to be personalized...
+- subject_ids: (string array) a list of subjects that can trigger the event.
+- qualifiers: (string) needs to be true for the event to trigger
+- can_trigger: (function) takes character index as parameter. returns TRUE if the function can trigger, false if it cannot.
+- options: (string array) array of strings for an options array. will contain all possible options.
+
+OBJECT NAME: EventOption
+DESCRIPTION: each event option is an option linked to an event. 
+ATTRIBUTES: 
+- title: (string)
+- description_template: (string)
+- event_id: (int)
+- can_assign: (function) takes character index as parameter. when event is triggered, eventOption.can_assign will return TRUE if it can be added as an option.
+- generate_result: (function) custom function depending on the event, but MUST return a string result for the character traits array. 
+
+OBJECT NAME: FirstName
+DESCRIPTION: part of firstname_array
+ATTRIBUTES: 
+- firstname: (string) name
+- gender: (char) m or f
+
+OBJECT NAME: Job
+DESCRIPTION: part of jobs array. 
+ATTRIBUTES:
+- id: (int)
+- title: (string) title of jobs
+- description: (string) description of job
+- qualifiers: (int) index of traits needed to attain the job.
+- career_path: (string) title of industry "culinary", "political", etc.
+- income_level: (int) from 0 to 4 will dictate income bracket.
+- organizations: (string) comma separated string of indexes indicating which organizations in organization_array have this.
+
+OBJECT NAME: Location
+DESCRIPTION: part of location array dataset from https://simplemaps.com/data/us-cities
+ATTRIBUTES:
+- id: (int) unique id.
+- city: (string) city titles
+- city_ascii: (string) ascii version of city
+- state_id: (string) state abbreviation
+- state_name: (string) state full name
+- county_fips: (int) FIPS "The 5-digit FIPS code for the primary county. The first two digits correspond to the state's FIPS code."
+- county_name: (string) name of city's county
+- population: (int) population count of city
+- density : (int) "The estimated population per square kilometer."
+- source: (string) "For some cities, our data is generated from a polygon representing the city, for others we simply have a point."
+- military: (boolean) "TRUE if this place is a military establishment such as a fort or base."
+- incorporated: (boolean) "TRUE if the place is a city/town. FALSE if the place is just a commonly known name for a populated area."
+- timezone: (string) "The city's time zone in the tz database format. (e.g. America/Los_Angeles)"
+- ranking: (int) "An integer from 1-5 that captures the importance of a city (1 is most important, 5 least important)."
+- zips: (string) space delimited zip codes in the city.
+
+OBJECT NAME: Relationship
+DESCRIPTION: needs constructor. calculates relationship.
+ATTRIBUTES: 
+- from: (int) index of character who has the feelings.
+- to: (int) integer of the subject of the person's feelings
+- value: (int) value of the character's emotions. between -100 to 100.
+- type: (string array) names of the relationship. normally will have just one element. but can add more.
+
+OBJECT NAME: Subject
+DESCRIPTION: list of subjects and their ids.
+ATTRIBUTES: 
+- id: (int)
+- subject: (string)
+
+OBJECT NAME: Trait
+DESCRIPTION: not a real object but part of traits_arr.
+ATTRIBUTES:
+- id: (int) id number
+- name: (string) title of trait.
+- description: (string) flavor text.
+- heredity: (int) between 0 and 100 chance of being inherited by children. 0 of course means it is not hereditary.
+- visible: (boolean) if TRUE, the player can see it during playthrough. If FALSE it is hidden aside from the initial alert after attaining it, but can be used and detected by programs.
+- duration: (int) -1 means it is A permanent trait. 0 means it is vulnerable to events. anything > 0 is the amount of turns (seasons) it takes to expire
+- feelings_about_getting_trait: (int) if it's 0 it's neutral, -1 if gaining the trait would be viewed positively by owning character, +1 if it would be viewed positively. this can be overridden.
+- qualifiers: (string) description of requirements for documentation purposes separated by semicolons.
+- can_assign(index): (function) takes character index as a parameter. checks the character and returns true or false if it can be assigned. 
